@@ -91,7 +91,6 @@ ajax({
 
 // Example addEvent()
 
-
 var e = document.getElementById('me');
 
 addEvent(e, 'click', function() {
