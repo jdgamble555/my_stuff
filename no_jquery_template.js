@@ -34,6 +34,9 @@ function ajax(opts) {
     var data = new FormData();
     for (var d in opts.data) data.append(d, opts.data[d]);
     
+    // default method is POST
+    if (!opts.hasOwnProperty('method')) opts.method = 'POST';
+    
     // setup url with query string if method = GET
     if (opts.method === 'GET') {
         var str = [];
