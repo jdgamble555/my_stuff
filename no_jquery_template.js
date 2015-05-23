@@ -1,3 +1,8 @@
+/*
+* Author: Jonathan Gamble
+* Name: no_jquery_template.js
+*/
+
 // Quick dom load funciton
 // http://tinyurl.com/llzo5ba
 var DOMReady = function(a,b,c) {
