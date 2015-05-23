@@ -29,8 +29,9 @@ DOMReady(function() {
 });
 
 /*
+ * 
  * Example ajax()
- *
+ *******************************************
  * ajax({
  *     url: 'test.php',
  *     method: 'GET',
@@ -42,19 +43,20 @@ DOMReady(function() {
  *     },
  *     error: myError
  * });
- *
+ *******************************************
  */
 function ajax(opts) {
 
     // default method is POST
     if (!opts.hasOwnProperty('method')) opts.method = 'POST';
     
-    // if method = GET setup url with query string
+    // if method = GET then setup url with query string
     if (opts.method === 'GET') {
         var str = [];
-        for(var k in opts.data) {
-            str.push(encodeURIComponent(k) + "=" + encodeURIComponent(opts.data[k]));
-        }
+        for (var k in opts.data)
+            str.push(encodeURIComponent(k)
+            + "="
+            + encodeURIComponent(opts.data[k]));
         opts.url = opts.url + '?' + str.join("&");
         data = null;
     }
@@ -63,8 +65,7 @@ function ajax(opts) {
         var data = new FormData();
         for (var d in opts.data) data.append(d, opts.data[d]);
     }
-
-    // - xmlhttp object -
+    // XML request object
     // http://stackoverflow.com/questions/415160
     var xmlhttp = function() {
         try { return new XMLHttpRequest(); } catch (e) {}
@@ -93,11 +94,12 @@ function myError(e) {
 }
 
 /*
- * event handlers
+ * Event Handlers
  * 
  * http://stackoverflow.com/questions/6348494
  * 
  * Example addEvent()
+ *******************************************
  *
  * var e = document.getElementById('me');
  *
@@ -107,6 +109,7 @@ function myError(e) {
  *
  * });
  * 
+ *******************************************
  */
 function addEvent(e, event, func) {
     return (e.attachEvent)
