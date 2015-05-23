@@ -7,9 +7,9 @@ var DOMReady = function(a,b,c) {
 };
 
 // When page is loaded...
-DOMReady(function () {
+DOMReady(function() {
     
-  // put your data here  
+  // put your data here
     
 
 });
