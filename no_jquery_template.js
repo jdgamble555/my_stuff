@@ -1,17 +1,21 @@
-/*
-* Author: Jonathan Gamble
-* Name: no_jquery_template.js
-*/
+/*********************************************************
+** Filename: no_jquery_template.js
+** Author: Jonathan Gamble
+*********************************************************/
 
-// Quick dom load funciton
+//
+// Quick DOM load function
 // http://tinyurl.com/llzo5ba
+//
 var DOMReady = function(a,b,c) {
     b = document,
     c = 'addEventListener';
     b[c] ? b[c]('DOMContentLoaded', a) : window.attachEvent('onload', a);
 };
 
+//
 // When page is loaded...
+//
 DOMReady(function() {
     
   // put your data here
@@ -21,7 +25,7 @@ DOMReady(function() {
 
 /*
 // Example ajax()
-
+//
 ajax({
     url: 'test.php',
     method: 'GET',
@@ -72,7 +76,7 @@ function ajax(opts) {
 
 /*
 // Example addEvent()
-
+//
 var e = document.getElementById('me');
 
 addEvent(e, 'click', function() {
@@ -89,11 +93,12 @@ function addEvent(e, event, func) {
      : e.addEventListener(event, func, false);
 }
 
+//
 // added to support older browsers
-// - getElementsByClassName() -
-// http://tinyurl.com/phdx82d
+//
 if (!document.getElementsByClassName) {
-
+    // - getElementsByClassName() -
+    // http://tinyurl.com/phdx82d
     document.getElementsByClassName = function(classname) {
         var elArray = [];
         var tmp = document.getElementsByTagName("*");
