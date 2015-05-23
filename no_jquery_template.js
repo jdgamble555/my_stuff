@@ -1,4 +1,4 @@
-// Quick DOM Load Function
+// Quick dom load funciton
 // http://tinyurl.com/llzo5ba
 var DOMReady = function(a,b,c) {
     b = document,
@@ -14,6 +14,20 @@ DOMReady(function() {
 
 });
 
+/*
+// Example ajax()
+
+ajax({
+    url: 'test.php',
+    method: 'GET',
+    data: {
+      me: 'hey'  
+    },
+    success: function(results) {
+        alert(results);
+    }
+});
+*/
 function ajax(opts) {
 
     // serialize form data
@@ -48,6 +62,17 @@ function ajax(opts) {
     xmlhttp.send(data);
 }
 
+/*
+// Example addEvent()
+
+var e = document.getElementById('me');
+
+addEvent(e, 'click', function() {
+
+   alert("clicked on #me!");
+
+});
+*/
 function addEvent(e, event, func) {
 // - event handlers -
 // http://stackoverflow.com/questions/6348494
@@ -56,11 +81,11 @@ function addEvent(e, event, func) {
      : e.addEventListener(event, func, false);
 }
 
-// not all browsers support this
-
-if (!document.getElementsByClassName) {
-// - getElementsByClassName -
+// added to support older browsers
+// - getElementsByClassName() -
 // http://tinyurl.com/phdx82d
+if (!document.getElementsByClassName) {
+
     document.getElementsByClassName = function(classname) {
         var elArray = [];
         var tmp = document.getElementsByTagName("*");
@@ -73,30 +98,3 @@ if (!document.getElementsByClassName) {
         return elArray;
     };
 }
-
-/*
-
-// Example ajax()
-
-ajax({
-    url: 'test.php',
-    method: 'GET',
-    data: {
-      me: 'hey'  
-    },
-    success: function(results) {
-        alert(results);
-    }
-});
-
-// Example addEvent()
-
-var e = document.getElementById('me');
-
-addEvent(e, 'click', function() {
-
-   alert("clicked on #me!");
-
-});
-
-*/
