@@ -2,57 +2,66 @@
 ** Filename: no_jquery_template.js
 ** Author: Jonathan Gamble
 *********************************************************/
+/*
+ * debugging to print AJAX errors
+ */
+var debug = 0;
 
-//
-// Quick DOM load function
-// http://tinyurl.com/llzo5ba
-//
+/*
+ * Quick DOM load function
+ * http://tinyurl.com/llzo5ba
+ */
 var DOMReady = function(a,b,c) {
     b = document,
     c = 'addEventListener';
     b[c] ? b[c]('DOMContentLoaded', a) : window.attachEvent('onload', a);
 };
 
-//
-// When page is loaded...
-//
+/*
+ * When page is loaded...
+ */
 DOMReady(function() {
     
   // put your data here
-    
+  
 
+    
 });
 
 /*
-// Example ajax()
-//
-ajax({
-    url: 'test.php',
-    method: 'GET',
-    data: {
-      me: 'hey'  
-    },
-    success: function(results) {
-        alert(results);
-    }
-});
-*/
+ * Example ajax()
+ *
+ * ajax({
+ *     url: 'test.php',
+ *     method: 'GET',
+ *     data: {
+ *       me: 'hey'  
+ *     },
+ *     success: function(results) {
+ *         alert(results);
+ *     },
+ *     error: myError
+ * });
+ *
+ */
 function ajax(opts) {
 
-    // serialize form data
-    var data = new FormData();
-    for (var d in opts.data) data.append(d, opts.data[d]);
-    
     // default method is POST
     if (!opts.hasOwnProperty('method')) opts.method = 'POST';
     
-    // setup url with query string if method = GET
+    // if method = GET setup url with query string
     if (opts.method === 'GET') {
         var str = [];
         for(var k in opts.data) {
             str.push(encodeURIComponent(k) + "=" + encodeURIComponent(opts.data[k]));
         }
         opts.url = opts.url + '?' + str.join("&");
+        data = null;
+    }
+    else {
+        // otherwise serialize form data for method = POST
+        var data = new FormData();
+        for (var d in opts.data) data.append(d, opts.data[d]);
     }
 
     // - xmlhttp object -
@@ -66,8 +75,10 @@ function ajax(opts) {
         return false;
     }();
     xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            opts.success(xmlhttp.response);
+        if (xmlhttp.readyState === 4) {
+            (xmlhttp.status === 200)
+                ? opts.success(xmlhttp.response)
+                : opts.error(xmlhttp.statusText);
         }
     };
     xmlhttp.open(opts.method, opts.url);
@@ -75,30 +86,43 @@ function ajax(opts) {
 }
 
 /*
-// Example addEvent()
-//
-var e = document.getElementById('me');
+ * Quick Error Function
+ */
+function myError(e) {
+    if (debug) alert(e);
+}
 
-addEvent(e, 'click', function() {
-
-   alert("clicked on #me!");
-
-});
-*/
+/*
+ * event handlers
+ * 
+ * http://stackoverflow.com/questions/6348494
+ * 
+ * Example addEvent()
+ *
+ * var e = document.getElementById('me');
+ *
+ * addEvent(e, 'click', function() {
+ *
+ *   alert("clicked on #me!");
+ *
+ * });
+ * 
+ */
 function addEvent(e, event, func) {
-// - event handlers -
-// http://stackoverflow.com/questions/6348494
     return (e.attachEvent)
      ? e.attachEvent('on' + event, func)
      : e.addEventListener(event, func, false);
 }
-
-//
-// added to support older browsers
-//
+/*
+ * getElementsByClassName()
+ * 
+ * http://tinyurl.com/phdx82d
+ * 
+ * added to support older browsers
+ * 
+ */
 if (!document.getElementsByClassName) {
-    // - getElementsByClassName() -
-    // http://tinyurl.com/phdx82d
+
     document.getElementsByClassName = function(classname) {
         var elArray = [];
         var tmp = document.getElementsByTagName("*");
